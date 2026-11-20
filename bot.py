@@ -202,6 +202,10 @@ def handle_update(update, username):
 
 
 def main():
+    if not TOKEN:
+        raise RuntimeError("Missing BOT_TOKEN environment variable.")
+    if OWNER_ID <= 0:
+        raise RuntimeError("OWNER_ID must be your numeric Telegram user ID.")
     me = api("getMe")
     username = me.get("username", "")
     if EXPECTED_USERNAME and username.lower() != EXPECTED_USERNAME.lower():
